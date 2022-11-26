@@ -3,6 +3,7 @@ import DisplayWord from "./DisplayWord"
 
 const Game = () => {
     const [word, setWord] = useState<string>('')
+    const [backendRes, setBackendRes] = useState('')
     // const [userInput, setUserInput] = useState<string>('')
 
     useEffect(() => {
@@ -10,7 +11,8 @@ const Game = () => {
             await fetch('https://random-word-api.herokuapp.com/word')
                 .then(res => res.json())
                 .then(res => res.toString())
-                .then(res => setWord(res))
+                .then(res => { setWord(' '.repeat(res.length)); return res })
+                .then(res => console.log(res))
         }
         getWord()
     }, [])
