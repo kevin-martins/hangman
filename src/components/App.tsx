@@ -5,6 +5,7 @@ import Menu from './Menu';
 import GameDifficulty from './GameDifficulty';
 import Dashboard from './Dashboard';
 import Game from './Game'
+import Settings from './Settings';
 
 const App = (): JSX.Element => {
   const gameState = useAppSelector(state => state.hangman.gameState)
@@ -20,17 +21,16 @@ const App = (): JSX.Element => {
   // console.log(gameState)
 
   return (
-    <div className="App">
-      <body>
-        <Center>
-          {gameState === GameState.MENU && <Menu />}
-          {gameState === GameState.PLAY && <Game />}
-          {gameState === GameState.DIFFICULTY_SELECTION && <GameDifficulty />}
-          {gameState === GameState.DASHBOARD && <Dashboard />}
-        </Center>
-      </body>
-    </div>
-  );
+    <body>
+      <Center>
+        {gameState === GameState.MENU && <Menu />}
+        {gameState === GameState.PLAY && <Game />}
+        {gameState === GameState.DIFFICULTY_SELECTION && <GameDifficulty />}
+        {gameState === GameState.DASHBOARD && <Dashboard />}
+        {gameState === GameState.SETTINGS && <Settings />}
+      </Center>
+    </body>
+  )
 }
 
 export default App;

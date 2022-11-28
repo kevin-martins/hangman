@@ -10,7 +10,7 @@ const Menu = () => {
             <Button element="Play" actions={[setGameState(GameState.PLAY)]} />
             <Button element={difficulty} actions={[setGameState(GameState.DIFFICULTY_SELECTION)]} />
             <Button element="Dashboard" actions={[setGameState(GameState.DASHBOARD)]} />
-            {/* <Button element="back" /> */}
+            <Button element="Settings" actions={[setGameState(GameState.SETTINGS)]} />
         </>
     )
 }
