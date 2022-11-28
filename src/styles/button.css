@@ -39,3 +39,7 @@ button > span > span:after {
 button:hover > span > span:after{
 	width: 100%;
 }
+
+.selected:after {
+	width: 100%
+}
