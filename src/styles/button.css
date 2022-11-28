@@ -1,0 +1,41 @@
+.centerBox{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 600px
+}
+
+button {
+	-webkit-appearance: none;
+	width: 250px;
+	height: 50px;
+	padding: 0;
+	margin: 0;
+}
+
+button span {
+	display: block;
+	position: relative;
+	line-height: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+
+button > span > span:after {
+	position: absolute;
+	top:0;left:0;right:0;bottom:0;
+	/* color:#1a65fa; */
+	content: '';
+	width: 0%;
+	height: 100%;
+	/* background: attr(data-attr-color); */
+    background: rgba(255, 255, 255, 0.8);
+	text-align: center;
+	margin: auto;
+	transition: width 0.2s;
+    z-index: -10;
+}
+
+button:hover > span > span:after{
+	width: 100%;
+}
