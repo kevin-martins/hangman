@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Difficulty } from '../models/difficulties'
-import { GameState } from '../models/game-states'
+import { Difficulty } from '../models/difficulty'
+import { GameState } from '../models/game-state'
 
 interface HangmanState {
     gameState: GameState

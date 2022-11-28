@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import produce from 'immer'
 import { WordProgression } from '../models/word-progression'
-import { Difficulty } from '../models/difficulties'
-import { GameState } from '../models/game-states'
+import { Difficulty } from '../models/difficulty'
+import { GameState } from '../models/game-state'
 import hangmanReducer from '../features/hangman-slice'
 
 export const store = configureStore({

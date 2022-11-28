@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../app/hooks"
-import { Difficulty } from "../models/difficulties"
+import { Difficulty } from "../models/difficulty"
 import '../styles/button.css'
 
 type Props = {
