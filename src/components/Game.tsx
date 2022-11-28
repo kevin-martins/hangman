@@ -1,30 +1,14 @@
-import { useEffect, useState } from "react"
-import DisplayWord from "./DisplayWord"
+import React from 'react'
+import { setGameState } from '../features/hangman-slice'
+import { GameState } from '../models/game-state'
+import Button from './Button'
 
-const Game = () => {
-    const [word, setWord] = useState<string>('')
-    const [backendRes, setBackendRes] = useState('')
-    // const [userInput, setUserInput] = useState<string>('')
-
-    useEffect(() => {
-        const getWord = async (): Promise<void> => {
-            await fetch('https://random-word-api.herokuapp.com/word')
-                .then(res => res.json())
-                .then(res => res.toString())
-                .then(res => { setWord(' '.repeat(res.length)); return res })
-                .then(res => console.log(res))
-        }
-        getWord()
-    }, [])
-
-    console.log(word)
-
-    return (
-        <>
-            {/* <input type="text" value="" /> */}
-            <DisplayWord word={word.split('')} />
-        </>
-    )
+const Game = (): JSX.Element => {
+  return (
+    <div>
+      <Button element="back" actions={[setGameState(GameState.MENU)]} />
+    </div>
+  )
 }
 
 export default Game
