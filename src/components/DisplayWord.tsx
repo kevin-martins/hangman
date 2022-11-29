@@ -1,15 +1,20 @@
-import DisplayLetter from "./DisplayLetter"
+import { useAppSelector } from "../app/hooks"
+import { WordProgression } from "../models/word-progression"
 
-type Props = {
-    word: Array<string>
+const DisplayWord = () => {
+    const wordProgression = useAppSelector(state => state.hangman.wordProgression)
+
+    return (
+        <div
+            className="flex flex-wrap gap-2 w-max mx-auto"
+        >
+            {wordProgression.map((word: WordProgression, i: number): JSX.Element => (
+                <span key={word.letter + i} className={word.color}>
+                    {word.letter}
+                </span>
+            ))}
+        </div>
+    )
 }
-
-const DisplayWord = ({ word }: Props) => (
-    <div
-        className="flex flex-wrap gap-2 bg-gray-200 rounded-lg p-4 w-max mx-auto"
-    >
-        {word.map((w, i) => <DisplayLetter key={w + i} letter={w} />)}
-    </div>
-)
 
 export default DisplayWord
