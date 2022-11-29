@@ -1,6 +1,6 @@
 import { WordProgression } from "./word-progression"
 
-export type Dashboard = {
+export type DashboardProps = {
     word: WordProgression[],
     points: number,
 }

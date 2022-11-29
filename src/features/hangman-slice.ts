@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Dashboard } from '../models/dashboard'
-import { Difficulty } from '../models/difficulty'
+import { DashboardProps } from '../models/dashboard'
+import { DifficultyProps } from '../models/difficulty'
 import { GameState } from '../models/game-state'
 import { WordProgression } from '../models/word-progression'
 
@@ -41,41 +41,64 @@ const dashboardExemple = [
 
 interface HangmanState {
     gameState: GameState
-    difficulty: Difficulty
+    difficulty: DifficultyProps
     word: string
     wordProgression: WordProgression[],
-    dashboard: Dashboard[]
+    wrongLetters: string[]
+    playerTurn: boolean
+    points: number
+    dashboard: DashboardProps[]
 }
 
 const initialState: HangmanState = {
     gameState: GameState.MENU,
-    difficulty: Difficulty.EASY,
+    difficulty: DifficultyProps.EASY,
     word: '',
     wordProgression: [],
+    wrongLetters: [],
+    playerTurn: false,
+    points: 0,
     dashboard: [...dashboardExemple, ...dashboardExemple, ...dashboardExemple, ...dashboardExemple],
 }
-
-// const initialState: CounterState = {
-//     word: '',
-//     wordProgression: [],
-//     points: 0,
-//     difficulty: Difficulty.EASY,
-//     hangmanProgress: 0,
-//     gameState: GameState.MENU,
-// }
 
 const hangmanSlice = createSlice({
     name: 'hangman',
     initialState,
     reducers: {
-        setDifficulty(state, action: PayloadAction<Difficulty>) {
+        setDifficulty(state, action: PayloadAction<DifficultyProps>) {
             state.difficulty = action.payload
         },
         setGameState(state, action: PayloadAction<GameState>) {
             state.gameState = action.payload
+        },
+        setPlayerTurn(state) {
+            state.playerTurn = !state.playerTurn
+        },
+        setWord(state, action: PayloadAction<string>) {
+            state.word = action.payload
+        },
+        setWordProgression(state, action: PayloadAction<WordProgression[]>) {
+            state.wordProgression = action.payload
+        },
+        setWrongLetter(state, action: PayloadAction<string>) {
+            state.wrongLetters.push(action.payload)
+        },
+        clear(state, action: PayloadAction<DashboardProps>) {
+            state.word = ''
+            state.wrongLetters = []
+            state.dashboard.push(action.payload)
+            state.points += action.payload.points
         }
     }
 })
 
-export const { setDifficulty, setGameState } = hangmanSlice.actions
+export const {
+    setDifficulty,
+    setGameState,
+    setPlayerTurn,
+    setWord,
+    setWordProgression,
+    setWrongLetter,
+    clear,
+} = hangmanSlice.actions
 export default hangmanSlice.reducer

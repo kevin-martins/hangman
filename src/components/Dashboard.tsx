@@ -1,12 +1,12 @@
 import { useAppSelector } from "../app/hooks"
 import { setGameState } from "../features/hangman-slice"
-import { Dashboard } from "../models/dashboard"
+import { DashboardProps } from "../models/dashboard"
 import { GameState } from "../models/game-state"
 import { WordProgression } from "../models/word-progression"
 import Button from "./Button"
 import '../styles/dashboard-scrollbar.css'
 
-const GameDashboard = (): JSX.Element => {
+const Dashboard = (): JSX.Element => {
   const data = useAppSelector(state => state.hangman.dashboard)
   return (
     <>
@@ -28,7 +28,7 @@ const GameDashboard = (): JSX.Element => {
               </tr>
             </thead>
             <tbody>
-              {data.map((dashboard: Dashboard, i: number) => (
+              {data.map((dashboard: DashboardProps, i: number) => (
                 <tr
                   key={i + Date.now()}
                   className={`${i !== data.length - 1 && 'border-b-[.5px] border-white/20'} text-center text-white`}
@@ -55,4 +55,4 @@ const GameDashboard = (): JSX.Element => {
   )
 }
 
-export default GameDashboard
+export default Dashboard

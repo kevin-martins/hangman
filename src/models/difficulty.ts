@@ -1,4 +1,4 @@
-export enum Difficulty {
+export enum DifficultyProps {
     EASY,
     CHALLENGING,
     HARD,

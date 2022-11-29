@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../app/hooks"
-import { Difficulty } from "../models/difficulty"
+import { DifficultyProps } from "../models/difficulty"
 import '../styles/button.css'
 
 type Props = {
-	element: Difficulty | string
+	element: DifficultyProps | string
 	actions: any[]
 	isSelected?: boolean
 }
@@ -13,9 +13,9 @@ const Button = ({ element, actions, isSelected = false }: Props) => {
 	const dispatch = useAppDispatch();
 	const setColor = (difficulty: number | string): string => {
 		switch (difficulty) {
-			case Difficulty.EASY: return 'text-lime-500'
-			case Difficulty.CHALLENGING: return 'text-yellow-500'
-			case Difficulty.HARD: return 'text-red-500'
+			case DifficultyProps.EASY: return 'text-lime-500'
+			case DifficultyProps.CHALLENGING: return 'text-yellow-500'
+			case DifficultyProps.HARD: return 'text-red-500'
 			default: return 'text-white hover:text-black'
 		}
 	}
@@ -33,7 +33,7 @@ const Button = ({ element, actions, isSelected = false }: Props) => {
 					data-attr-color='white'
 					className={`${setColor(element)} ${isSelected && 'selected'} font-semibold z-10`}
 				>
-					{typeof element === "number" ? Difficulty[element] : element.toUpperCase()}
+					{typeof element === "number" ? DifficultyProps[element] : element.toUpperCase()}
 				</span>
 			</span>
 		</button>
