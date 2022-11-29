@@ -12,17 +12,17 @@ const GameDifficulty = (): JSX.Element => {
             <Button
                 element={Difficulty.EASY}
                 actions={[setDifficulty(Difficulty.EASY), setGameState(GameState.MENU)]}
-                selected={difficulty === Difficulty.EASY}
+                isSelected={difficulty === Difficulty.EASY}
             />
             <Button
                 element={Difficulty.CHALLENGING}
                 actions={[setDifficulty(Difficulty.CHALLENGING), setGameState(GameState.MENU)]}
-                selected={difficulty === Difficulty.CHALLENGING}
+                isSelected={difficulty === Difficulty.CHALLENGING}
             />
             <Button
                 element={Difficulty.HARD}
                 actions={[setDifficulty(Difficulty.HARD), setGameState(GameState.MENU)]}
-                selected={difficulty === Difficulty.HARD}
+                isSelected={difficulty === Difficulty.HARD}
             />
             <Button
                 element="back"
