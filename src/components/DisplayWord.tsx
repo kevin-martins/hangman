@@ -1,12 +1,12 @@
 import { useAppSelector } from "../app/hooks"
 import { WordProgression } from "../models/word-progression"
 
-const DisplayWord = () => {
+const DisplayWord = (): JSX.Element => {
     const wordProgression = useAppSelector(state => state.hangman.wordProgression)
 
     return (
         <div
-            className="flex flex-wrap gap-2 w-max mx-auto"
+            className="flex flex-wrap gap-2 w-max mx-auto text-2xl"
         >
             {wordProgression.map((word: WordProgression, i: number): JSX.Element => (
                 <span key={word.letter + i} className={word.color}>
