@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-interface Word {
-
-}
+type Word = Array<string>
 
 export const apiSlice = createApi({
     reducerPath: 'api',
