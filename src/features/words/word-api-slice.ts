@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-type Word = Array<string>
-
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
@@ -9,7 +7,7 @@ export const apiSlice = createApi({
     }),
     endpoints(builder) {
         return {
-            fetchWords: builder.query<Word, number>({
+            fetchWords: builder.query<string[], number>({
                 query(length) {
                     return `/word?length=${length}`
                 }
