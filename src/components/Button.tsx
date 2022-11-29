@@ -5,10 +5,10 @@ import '../styles/button.css'
 type Props = {
 	element: Difficulty | string
 	actions: any[]
-	selected?: boolean
+	isSelected?: boolean
 }
 
-const Button = ({ element, actions, selected = false }: Props) => {
+const Button = ({ element, actions, isSelected = false }: Props) => {
 	const difficulty = useAppSelector(state => state.hangman.difficulty)
 	const dispatch = useAppDispatch();
 	const setColor = (difficulty: number | string): string => {
@@ -31,7 +31,7 @@ const Button = ({ element, actions, selected = false }: Props) => {
 			<span className="">
 				<span
 					data-attr-color='white'
-					className={`${setColor(element)} ${selected && 'selected'} font-semibold z-10`}
+					className={`${setColor(element)} ${isSelected && 'selected'} font-semibold z-10`}
 				>
 					{typeof element === "number" ? Difficulty[element] : element.toUpperCase()}
 				</span>
