@@ -11,21 +11,29 @@ const GameDashboard = (): JSX.Element => {
   return (
     <>
       <div className="relative">
-        <div className="h-72 overflow-auto">
+        <div className="h-72 overflow-auto mt-10 pr-3">
           <table className="w-full mb-2">
-            <thead className="border-[.5px] border-white text-white/80">
-              <tr className="">
-                <th className="border-[.5px] border-white">Words</th>
-                <th>Points</th>
+            <thead className="text-white/80">
+              <tr>
+                <th>
+                  <span className="absolute w-1/2 left-0 top-0 border-b-[.5px] border-white">
+                    Words
+                  </span>
+                </th>
+                <th>
+                  <span className="absolute w-1/2 left-1/2 pr-6 top-0 border-b-[.5px] border-white">
+                    Points
+                  </span>
+                </th>
               </tr>
             </thead>
-            <tbody className="border-[.5px] h-24 border-white">
+            <tbody>
               {data.map((dashboard: Dashboard, i: number) => (
                 <tr
                   key={i + Date.now()}
-                  className={`border-b-[.5px] ${i === data.length - 1 ? 'border-white' : 'border-white/20'} text-center text-white`}
+                  className={`${i !== data.length - 1 && 'border-b-[.5px] border-white/20'} text-center text-white`}
                 >
-                  <td>
+                  <td className="w-1/2">
                     {dashboard.word.map((word: WordProgression, i: number) => (
                       <span
                         key={i + Date.now()}
