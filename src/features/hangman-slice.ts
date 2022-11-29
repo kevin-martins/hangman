@@ -42,7 +42,6 @@ const dashboardExemple = [
 interface HangmanState {
     gameState: GameState
     difficulty: DifficultyProps
-    word: string
     wordProgression: WordProgression[],
     wrongLetters: string[]
     playerTurn: boolean
@@ -53,7 +52,6 @@ interface HangmanState {
 const initialState: HangmanState = {
     gameState: GameState.MENU,
     difficulty: DifficultyProps.EASY,
-    word: '',
     wordProgression: [],
     wrongLetters: [],
     playerTurn: false,
@@ -71,11 +69,8 @@ const hangmanSlice = createSlice({
         setGameState(state, action: PayloadAction<GameState>) {
             state.gameState = action.payload
         },
-        setPlayerTurn(state) {
-            state.playerTurn = !state.playerTurn
-        },
-        setWord(state, action: PayloadAction<string>) {
-            state.word = action.payload
+        setPlayerTurn(state, action: PayloadAction<boolean>) {
+            state.playerTurn = action.payload
         },
         setWordProgression(state, action: PayloadAction<WordProgression[]>) {
             state.wordProgression = action.payload
@@ -84,7 +79,6 @@ const hangmanSlice = createSlice({
             state.wrongLetters.push(action.payload)
         },
         clear(state, action: PayloadAction<DashboardProps>) {
-            state.word = ''
             state.wrongLetters = []
             state.dashboard.push(action.payload)
             state.points += action.payload.points
@@ -96,7 +90,6 @@ export const {
     setDifficulty,
     setGameState,
     setPlayerTurn,
-    setWord,
     setWordProgression,
     setWrongLetter,
     clear,
