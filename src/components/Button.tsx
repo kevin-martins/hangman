@@ -8,7 +8,7 @@ type Props = {
 	isSelected?: boolean
 }
 
-const Button = ({ element, actions, isSelected = false }: Props) => {
+const Button = ({ element, actions, isSelected = false }: Props): JSX.Element => {
 	const difficulty = useAppSelector(state => state.hangman.difficulty)
 	const dispatch = useAppDispatch();
 	const setColor = (difficulty: number | string): string => {
