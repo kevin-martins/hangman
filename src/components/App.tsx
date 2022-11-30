@@ -11,7 +11,7 @@ const App = (): JSX.Element => {
   const gameState = useAppSelector(state => state.hangman.gameState)
 
   return (
-    <body className='bg-gray-700 h-screen'>
+    <div className='bg-gray-700 h-screen'>
       {gameState === GameState.PLAY ?
         <Game /> :
         <Center>
@@ -21,7 +21,7 @@ const App = (): JSX.Element => {
           {gameState === GameState.SETTINGS && <Settings />}
         </Center>
       }
-    </body>
+    </div>
   )
 }
 
