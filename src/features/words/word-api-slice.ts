@@ -3,13 +3,18 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://random-word-api.herokuapp.com'
+        baseUrl: 'https://api.api-ninjas.com/v1/randomword',
+        prepareHeaders(headers) {
+            headers.set('x-api-key', "3OWuTUoCOIKPSXixNdjAHQ==0QPsbU4mdPMtdc3X")
+            return headers
+        }
     }),
     endpoints(builder) {
         return {
-            fetchWords: builder.query<string[], number>({
+            fetchWords: builder.query<{ word: string }, number>({
                 query(length) {
-                    return `/word?length=${length}`
+                    // return `/length=${length}`
+                    return ''
                 }
             })
         }

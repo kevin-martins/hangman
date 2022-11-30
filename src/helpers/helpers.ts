@@ -8,7 +8,7 @@ export const wordDifficulty = (difficulty: DifficultyProps): number => {
 }
 
 export const progression = (word: string, userInput: string = "_", correctLetters: string[] = []): WordProgression[] => {
-  return word.split('').map((letter) => {
+  return word?.split('').map((letter) => {
     if (letter === userInput || correctLetters.includes(letter)) 
       return { letter: letter, color: 'text-lime-500' }
     return { letter: "_", color: 'text-white' }
