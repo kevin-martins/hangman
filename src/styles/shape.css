@@ -1,0 +1,10 @@
+svg {
+    fill: transparent;
+    stroke: #fff;
+    stroke-width: 6px;
+    stroke-linecap: round;
+}
+
+svg:nth-child(n+4) {
+    
+}
