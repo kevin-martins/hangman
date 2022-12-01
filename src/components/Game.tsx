@@ -31,14 +31,6 @@ const Game = (): JSX.Element => {
   const gameState = useAppSelector(state => state.hangman.gameState)
   const dispatch = useAppDispatch()
 
-  // useEffect(() => {
-  //   if (gameState === GameState.RESTART) {
-  //     forceUpdate()
-  //     console.log('here')
-  //     // dispatch(setGameState(GameState.PLAY))
-  //   }
-  // }, [winner, gameState])
-
   useEffect(() => {
     setTimeout(() => {
       setIsFetching(false)
