@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { setGameState, setPlayerTurn, setWordProgression, setWrongLetter } from '../features/hangman-slice'
+import { setPlayerTurn, setWord, setWordProgression, setWrongLetter } from '../features/hangman-slice'
 import { useFetchWordsQuery } from '../features/words/word-api-slice'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { correctLetters, progression, wordDifficulty } from '../helpers/helpers'
@@ -7,27 +7,39 @@ import { GameState } from '../models/game-state'
 import WrongLetters from './WrongLetters'
 import DisplayWord from './DisplayWord'
 import Points from './Points'
-import Button from './Button'
 import Loading from './Loading'
 import Shape from './Shape'
 import Notification from './Notification'
-
-const notificationTimer = () => {
-  
-}
+import Restart from './Restart'
 
 const Game = (): JSX.Element => {
   const [timer, setTimer] = useState<any>()
   const [notification, setNotification] = useState<{ shown: boolean, message: string}>({ shown: false, message: ''})
   const wordProgression = useAppSelector(state => state.hangman.wordProgression)
   const wrongLetters = useAppSelector(state => state.hangman.wrongLetters)
-  const difficulty = useAppSelector(state => state.hangman.difficulty)
   const playerTurn = useAppSelector(state => state.hangman.playerTurn)
-  const { data = { word: '' }, isFetching } = useFetchWordsQuery(wordDifficulty(difficulty))
+  const winner = useAppSelector(state => state.hangman.winner)
+  // const { data = { word: '' }, isFetching } = useFetchWordsQuery(wordDifficulty(difficulty))
+  const [isFetching, setIsFetching] = useState(true)
+  const data = { word: "azeRty" }
+  const word = useAppSelector(state => state.hangman.word)
+  const gameState = useAppSelector(state => state.hangman.gameState)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    if (gameState === GameState.RESTART)
+      window.location.reload()
+  }, [winner])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsFetching(false)
+    }, 600)
+  }, [])
+
+  useEffect(() => {
     if (!isFetching) {
+      dispatch(setWord(data.word))
       dispatch(setWordProgression(progression(data.word)))
       dispatch(setPlayerTurn(true))
     }
@@ -38,10 +50,10 @@ const Game = (): JSX.Element => {
       const { key, keyCode } = event
       if (keyCode >= 65 && keyCode <= 90) {
         const userInput: string = key.toLowerCase()
-        if (data.word.includes(userInput)) {
-          if (!correctLetters(wordProgression).includes(userInput))
-            dispatch(setWordProgression(progression(data.word, userInput, correctLetters(wordProgression))))
-          else {
+        if (word.includes(userInput)) {
+          if (!correctLetters(wordProgression).includes(userInput)) {
+            dispatch(setWordProgression(progression(word, userInput, correctLetters(wordProgression))))
+          } else {
             clearTimeout(timer)
             setNotification({ shown: true, message: `Letter '${userInput.toUpperCase()}' is correct but had already been used !` })
           }
@@ -66,11 +78,11 @@ const Game = (): JSX.Element => {
   useEffect(() => {
     setTimer(setTimeout(() => {
       setNotification({ shown: false, message: '' })
-    }, 3000))
+    }, 2000))
   }, [notification.shown])
 
   return (
-    <div className='h-full'>
+    <div className='bg-gray-700 h-screen'>
       {isFetching ? <Loading /> : 
       <>
         <Notification notification={notification} />
@@ -78,7 +90,7 @@ const Game = (): JSX.Element => {
         <WrongLetters />
         <Shape />
         <DisplayWord />
-        {/* <Button element="back" actions={[setGameState(GameState.MENU)]} /> */}
+        <Restart />
       </>
       }
     </div>
