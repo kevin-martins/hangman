@@ -98,13 +98,15 @@ const hangmanSlice = createSlice({
         setReset(state) {
             const points = generatePoints(state.wordProgression, state.difficulty, state.winner)
             if (WinningState.COMPUTER)
-                state.dashboard.push({ word: completeWord(state.word, state.wordProgression), points: points })
+            state.dashboard.push({ word: completeWord(state.word, state.wordProgression), points: points })
             else
-                state.dashboard.push({ word: state.wordProgression, points: points })
+            state.dashboard.push({ word: state.wordProgression, points: points })
             state.wrongLetters = []
             state.wordProgression = []
             state.points += points
+            state.playerTurn = true
             state.winner = WinningState.NONE
+            state.word = ''
         }
     }
 })
