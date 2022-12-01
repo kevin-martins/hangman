@@ -38,7 +38,7 @@ const Game = (): JSX.Element => {
 
   useEffect(() => {
     if (!isFetching) {
-      const randomWord = data[difficulty][Math.floor(Math.random() * data.length)]
+      const randomWord = data[difficulty][Math.floor(Math.random() * data[difficulty].length)]
       dispatch(setWord(randomWord))
     }
   }, [isFetching])
