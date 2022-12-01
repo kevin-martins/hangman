@@ -11,7 +11,7 @@ export const apiSlice = createApi({
     }),
     endpoints(builder) {
         return {
-            fetchWords: builder.query<{ word: string }, number>({
+            fetchWords: builder.query<{ word: string }, number | void>({
                 query(length) {
                     // return `/length=${length}`
                     return ''
