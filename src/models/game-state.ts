@@ -4,5 +4,5 @@ export enum GameState {
     DIFFICULTY_SELECTION,
     DASHBOARD,
     SETTINGS,
-    END_GAME,
+    RESTART,
 }
