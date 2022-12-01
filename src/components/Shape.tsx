@@ -1,16 +1,20 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from "../app/hooks"
-import { setWinnerState, setWordProgression } from '../features/hangman-slice'
+import { setWinnerState } from '../features/hangman-slice'
+import { useSound } from 'use-sound'
 import { checkComputerVictory, completeWord } from '../helpers/helpers'
 import { WinningState } from '../models/winner-state'
 import '../styles/shape.css'
+import gameOver from '../assets/game-over.wav'
 
 const Shape = () => {
+  const [playGameOver] = useSound(gameOver , { volume: .25 })
   const wrongLetters = useAppSelector(state => state.hangman.wrongLetters).length
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (checkComputerVictory(wrongLetters) === WinningState.COMPUTER) {
+      playGameOver()
       dispatch(setWinnerState(WinningState.COMPUTER))
     }
   }, [wrongLetters])

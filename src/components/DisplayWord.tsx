@@ -2,14 +2,21 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { setWinnerState } from '../features/hangman-slice'
 import { checkPlayerVictory } from '../helpers/helpers'
+import { WinningState } from '../models/winner-state'
 import { WordProgression } from "../models/word-progression"
+import { useSound } from 'use-sound'
+import gameWon from '../assets/won.wav'
 
 const DisplayWord = (): JSX.Element => {
+    const [playWon] = useSound(gameWon, { volume: .25 })
     const wordProgression = useAppSelector(state => state.hangman.wordProgression)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(setWinnerState(checkPlayerVictory(wordProgression)))
+        if (checkPlayerVictory(wordProgression) === WinningState.PLAYER) {
+            playWon()
+            dispatch(setWinnerState(WinningState.PLAYER))
+        }
     }, [wordProgression])
 
     return (
