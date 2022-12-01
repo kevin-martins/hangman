@@ -1,4 +1,6 @@
-import { useAppSelector } from '../app/hooks'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { setGameState } from '../features/hangman-slice';
 import { GameState } from '../models/game-state';
 import Center from './Center';
 import Menu from './Menu';
@@ -9,6 +11,11 @@ import Settings from './Settings';
 
 const App = (): JSX.Element => {
   const gameState = useAppSelector(state => state.hangman.gameState)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (gameState === GameState.RESTART) dispatch(setGameState(GameState.PLAY))
+  }, [gameState])
 
   return (
     <div className='bg-gray-700 h-screen'>
