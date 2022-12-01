@@ -1,6 +1,9 @@
+import { useSound } from 'use-sound'
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { DifficultyProps } from "../models/difficulty"
 import '../styles/button.css'
+import soundHover from '../assets/button-hover.wav'
+import soundClick from '../assets/button-click.wav'
 
 type Props = {
 	element: DifficultyProps | string
@@ -9,7 +12,8 @@ type Props = {
 }
 
 const Button = ({ element, actions, isSelected = false }: Props): JSX.Element => {
-	const difficulty = useAppSelector(state => state.hangman.difficulty)
+	const [playHover] = useSound(soundHover, { volume: .25 })
+	const [playClick] = useSound(soundClick, { volume: .4 })
 	const dispatch = useAppDispatch();
 	const setColor = (difficulty: number | string): string => {
 		switch (difficulty) {
@@ -21,13 +25,18 @@ const Button = ({ element, actions, isSelected = false }: Props): JSX.Element =>
 	}
 
 	const handleClick = () => {
+		playClick()
 		actions.forEach(action => {
 			dispatch(action)
 		})
 	}
 
     return (
-        <button className="mx-auto bg-gray-600" onClick={handleClick}>
+        <button
+			className="mx-auto bg-gray-600"
+			onClick={handleClick}
+			onMouseEnter={() => playHover()}
+		>
 			<span className="">
 				<span
 					data-attr-color='white'
