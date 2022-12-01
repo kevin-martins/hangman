@@ -47,11 +47,11 @@ interface HangmanState {
     word: string
     wordProgression: WordProgression[],
     wrongLetters: string[]
-    correctLetters: string[]
     playerTurn: boolean
     winner: WinningState
     points: number
     dashboard: DashboardProps[]
+    soundVolume: number
 }
 
 const initialState: HangmanState = {
@@ -60,11 +60,11 @@ const initialState: HangmanState = {
     word: '',
     wordProgression: [],
     wrongLetters: [],
-    correctLetters: [],
     playerTurn: false,
     winner: WinningState.NONE,
     points: 0,
     dashboard: [],
+    soundVolume: 50,
 }
 
 const hangmanSlice = createSlice({
@@ -80,6 +80,18 @@ const hangmanSlice = createSlice({
         setWord(state, action: PayloadAction<string>) {
             state.word = action.payload.toLowerCase()
         },
+        increaseSoundVolume(state) {
+            if (state.soundVolume <= 95)
+                state.soundVolume += 5
+            else if (state.soundVolume > 100)
+                state.soundVolume = 100
+        },
+        decreaseSoundVolume(state) {
+            if (state.soundVolume >= 5)
+                state.soundVolume -= 5
+            else if (state.soundVolume < 0)
+                state.soundVolume = 0
+        },
         setPlayerTurn(state, action: PayloadAction<boolean>) {
             state.playerTurn = action.payload
         },
@@ -88,9 +100,6 @@ const hangmanSlice = createSlice({
         },
         setWrongLetter(state, action: PayloadAction<string>) {
             state.wrongLetters.push(action.payload)
-        },
-        setCorrectLetters(state, action: PayloadAction<string>) {
-            state.correctLetters.push(action.payload)
         },
         setWinnerState(state, action: PayloadAction<WinningState>) {
             state.winner = action.payload
@@ -118,8 +127,9 @@ export const {
     setWord,
     setWordProgression,
     setWrongLetter,
-    setCorrectLetters,
     setWinnerState,
+    increaseSoundVolume,
+    decreaseSoundVolume,
     setReset,
 } = hangmanSlice.actions
 export default hangmanSlice.reducer
