@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import { setPlayerTurn, setWord, setWordProgression, setWrongLetter } from '../features/hangman-slice'
 import { useFetchWordsQuery } from '../features/words/word-api-slice'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { correctLetters, progression, wordDifficulty } from '../helpers/helpers'
-import { GameState } from '../models/game-state'
+import { correctLetters, progression } from '../helpers/helpers'
 import WrongLetters from './WrongLetters'
 import DisplayWord from './DisplayWord'
 import Points from './Points'
@@ -11,6 +10,7 @@ import Loading from './Loading'
 import Shape from './Shape'
 import Notification from './Notification'
 import Restart from './Restart'
+import { WinningState } from '../models/winner-state'
 
 const Game = (): JSX.Element => {
   const [timer, setTimer] = useState<any>()
@@ -19,17 +19,25 @@ const Game = (): JSX.Element => {
   const wrongLetters = useAppSelector(state => state.hangman.wrongLetters)
   const playerTurn = useAppSelector(state => state.hangman.playerTurn)
   const winner = useAppSelector(state => state.hangman.winner)
-  // const { data = { word: '' }, isFetching } = useFetchWordsQuery(wordDifficulty(difficulty))
+  const difficulty = useAppSelector(state => state.hangman.difficulty)
+  // const { data = { word: '' }, isFetching } = useFetchWordsQuery()
   const [isFetching, setIsFetching] = useState(true)
-  const data = { word: "azeRty" }
+  const data = [
+    ["azerty", "qsdfgh", "wxcvbn"],
+    ["azertyui", "qsdfghjk", "wxcvbn,;"],
+    ["azertyuiopqs", "qsdfghjklmwx", "wxcvbnazert"],
+  ]
   const word = useAppSelector(state => state.hangman.word)
   const gameState = useAppSelector(state => state.hangman.gameState)
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    if (gameState === GameState.RESTART)
-      window.location.reload()
-  }, [winner])
+  // useEffect(() => {
+  //   if (gameState === GameState.RESTART) {
+  //     forceUpdate()
+  //     console.log('here')
+  //     // dispatch(setGameState(GameState.PLAY))
+  //   }
+  // }, [winner, gameState])
 
   useEffect(() => {
     setTimeout(() => {
@@ -39,11 +47,15 @@ const Game = (): JSX.Element => {
 
   useEffect(() => {
     if (!isFetching) {
-      dispatch(setWord(data.word))
-      dispatch(setWordProgression(progression(data.word)))
-      dispatch(setPlayerTurn(true))
+      const randomWord = data[difficulty][Math.floor(Math.random() * data.length)]
+      dispatch(setWord(randomWord))
     }
   }, [isFetching])
+
+  useEffect(() => {
+    dispatch(setWordProgression(progression(word)))
+    dispatch(setPlayerTurn(true))
+  }, [word])
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -90,7 +102,7 @@ const Game = (): JSX.Element => {
         <WrongLetters />
         <Shape />
         <DisplayWord />
-        <Restart />
+        {winner !== WinningState.NONE && <Restart />}
       </>
       }
     </div>
