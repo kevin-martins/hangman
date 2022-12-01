@@ -23,12 +23,11 @@ const Game = (): JSX.Element => {
   // const { data = { word: '' }, isFetching } = useFetchWordsQuery()
   const [isFetching, setIsFetching] = useState(true)
   const data = [
-    ["azerty", "qsdfgh", "wxcvbn"],
-    ["azertyui", "qsdfghjk", "wxcvbn,;"],
-    ["azertyuiopqs", "qsdfghjklmwx", "wxcvbnazert"],
+    ["bonjour", "animal", "licorne", "chanter", "classe"],
+    ["classique", "atomique", "attraction", "combattant", "jongleur"],
+    ["incroyablement", "polykystique", "polycyclique", "chronophage", "hypoglycemie"],
   ]
   const word = useAppSelector(state => state.hangman.word)
-  const gameState = useAppSelector(state => state.hangman.gameState)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
