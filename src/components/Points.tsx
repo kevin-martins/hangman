@@ -9,6 +9,7 @@ const Points = (): JSX.Element => {
             <img
                 className=''
                 src="https://img.icons8.com/emoji/48/null/coin-emoji.png"
+                alt="gold image"
                 height={32}
                 width={32}
             />
