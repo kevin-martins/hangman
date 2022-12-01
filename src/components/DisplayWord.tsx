@@ -8,7 +8,8 @@ import { useSound } from 'use-sound'
 import gameWon from '../assets/won.wav'
 
 const DisplayWord = (): JSX.Element => {
-    const [playWon] = useSound(gameWon, { volume: .25 })
+    const soundVolume = useAppSelector(state => state.hangman.soundVolume) / 100
+    const [playWon] = useSound(gameWon, { volume: soundVolume })
     const wordProgression = useAppSelector(state => state.hangman.wordProgression)
     const dispatch = useAppDispatch()
 

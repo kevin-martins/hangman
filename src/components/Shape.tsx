@@ -8,7 +8,8 @@ import '../styles/shape.css'
 import gameOver from '../assets/game-over.wav'
 
 const Shape = () => {
-  const [playGameOver] = useSound(gameOver , { volume: .25 })
+  const soundVolume = useAppSelector(state => state.hangman.soundVolume) / 100
+  const [playGameOver] = useSound(gameOver , { volume: soundVolume })
   const wrongLetters = useAppSelector(state => state.hangman.wrongLetters).length
   const dispatch = useAppDispatch()
 
