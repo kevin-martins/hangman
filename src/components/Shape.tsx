@@ -1,8 +1,19 @@
-import { useAppSelector } from "../app/hooks"
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from "../app/hooks"
+import { setWinnerState, setWordProgression } from '../features/hangman-slice'
+import { checkComputerVictory, completeWord } from '../helpers/helpers'
+import { WinningState } from '../models/winner-state'
 import '../styles/shape.css'
 
 const Shape = () => {
   const wrongLetters = useAppSelector(state => state.hangman.wrongLetters).length
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (checkComputerVictory(wrongLetters) === WinningState.COMPUTER) {
+      dispatch(setWinnerState(WinningState.COMPUTER))
+    }
+  }, [wrongLetters])
 
   return (
     <svg height="250" width="200" className="absolute lg:top-32 sm:top-20 top-14 sm:left-20 lg:left-1/4">

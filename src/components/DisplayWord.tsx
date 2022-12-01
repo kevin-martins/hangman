@@ -1,8 +1,16 @@
-import { useAppSelector } from "../app/hooks"
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from "../app/hooks"
+import { setWinnerState } from '../features/hangman-slice'
+import { checkPlayerVictory } from '../helpers/helpers'
 import { WordProgression } from "../models/word-progression"
 
 const DisplayWord = (): JSX.Element => {
     const wordProgression = useAppSelector(state => state.hangman.wordProgression)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(setWinnerState(checkPlayerVictory(wordProgression)))
+    }, [wordProgression])
 
     return (
         <div
