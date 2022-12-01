@@ -12,9 +12,9 @@ type Props = {
 }
 
 const Button = ({ element, actions, isSelected = false }: Props): JSX.Element => {
-	const buttonVolume = useAppSelector(state => state.hangman.soundVolume) / 100
-	const [playHover] = useSound(soundHover, { volume: buttonVolume })
-	const [playClick] = useSound(soundClick, { volume: buttonVolume })
+	const soundVolume = useAppSelector(state => state.hangman.soundVolume) / 100
+	const [playHover] = useSound(soundHover, { volume: soundVolume })
+	const [playClick] = useSound(soundClick, { volume: soundVolume })
 	const dispatch = useAppDispatch();
 	const setColor = (difficulty: number | string): string => {
 		switch (difficulty) {

@@ -1,19 +1,23 @@
-import React from 'react'
+import { useSound } from 'use-sound'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { decreaseSoundVolume, increaseSoundVolume, setGameState } from '../features/hangman-slice'
 import { GameState } from '../models/game-state'
 import Button from './Button'
+import soundClick from '../assets/button-click.wav'
 
 const Settings = (): JSX.Element => {
   const soundVolume = useAppSelector(state => state.hangman.soundVolume)
+	const [playClick] = useSound(soundClick, { volume: soundVolume / 100 })
   const dispatch = useAppDispatch()
 
   const handleDecreaseVolume = () => {
     dispatch(decreaseSoundVolume())
+    playClick()
   }
 
   const handleIncreaseVolume = () => {
     dispatch(increaseSoundVolume())
+    playClick()
   }
 
   return (
