@@ -1,4 +1,3 @@
-import WrongLetters from "../components/WrongLetters"
 import { DifficultyProps } from "../models/difficulty"
 import { WinningState } from "../models/winner-state"
 import { WordProgression } from "../models/word-progression"
@@ -44,8 +43,8 @@ export const generatePoints = (wordProgression: WordProgression[], difficulty: D
 }
 
 export const checkPlayerVictory = (wordProgression: WordProgression[]): WinningState => {
-  console.log(wordProgression.every(el => el.letter !== "_"))
-  if (wordProgression.every(el => el.letter !== "_")) return WinningState.PLAYER
+  if (wordProgression.length !== 0 && wordProgression.every(el => el.letter !== "_"))
+    return WinningState.PLAYER
   return WinningState.NONE
 }
 
