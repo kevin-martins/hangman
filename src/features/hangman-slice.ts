@@ -64,7 +64,7 @@ const initialState: HangmanState = {
     winner: WinningState.NONE,
     points: 0,
     dashboard: [],
-    soundVolume: 50,
+    soundVolume: 20,
 }
 
 const hangmanSlice = createSlice({
@@ -92,6 +92,11 @@ const hangmanSlice = createSlice({
             else if (state.soundVolume < 0)
                 state.soundVolume = 0
         },
+        setPoints(state) {
+            const points = generatePoints(state.wordProgression, state.difficulty, state.winner)
+            console.log(state.points, points)
+            state.points += points
+        },
         setPlayerTurn(state, action: PayloadAction<boolean>) {
             state.playerTurn = action.payload
         },
@@ -112,7 +117,7 @@ const hangmanSlice = createSlice({
             state.dashboard.push({ word: state.wordProgression, points: points })
             state.wrongLetters = []
             state.wordProgression = []
-            state.points += points
+            // state.points += points
             state.playerTurn = true
             state.winner = WinningState.NONE
             state.word = ''
@@ -125,6 +130,7 @@ export const {
     setGameState,
     setPlayerTurn,
     setWord,
+    setPoints,
     setWordProgression,
     setWrongLetter,
     setWinnerState,
