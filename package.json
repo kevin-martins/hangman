@@ -1,7 +1,7 @@
 {
   "name": "hangman",
   "version": "0.1.0",
-  "homepage": "https://kevin-martins.github.io/hangman/",
+  "homepage": "https://kevin-martins.github.io/hangman",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",
@@ -26,7 +26,7 @@
   },
   "scripts": {
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -b main -d build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
