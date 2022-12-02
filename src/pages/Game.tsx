@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
-import { setPlayerTurn, setWord, setWordProgression, setWrongLetter } from '../features/hangman-slice'
+import { setGameState, setPlayerTurn, setWord, setWordProgression, setWrongLetter } from '../features/hangman-slice'
 import { useFetchWordsQuery } from '../features/words/word-api-slice'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { correctLetters, progression } from '../helpers/helpers'
-import WrongLetters from './WrongLetters'
-import DisplayWord from './DisplayWord'
-import Points from './Points'
-import Loading from './Loading'
-import Shape from './Shape'
-import Notification from './Notification'
-import Restart from './Restart'
+import WrongLetters from '../components/WrongLetters'
+import DisplayWord from '../components/DisplayWord'
+import Points from '../components/Points'
+import Loading from '../components/Loading'
+import Shape from '../components/Shape'
+import Notification from '../components/Notification'
+import Restart from '../components/Restart'
 import { WinningState } from '../models/winner-state'
+import { GameState } from '../models/game-state'
 
 const Game = (): JSX.Element => {
   const [timer, setTimer] = useState<any>()
@@ -20,6 +21,7 @@ const Game = (): JSX.Element => {
   const playerTurn = useAppSelector(state => state.hangman.playerTurn)
   const winner = useAppSelector(state => state.hangman.winner)
   const difficulty = useAppSelector(state => state.hangman.difficulty)
+  const gameState = useAppSelector(state => state.hangman.gameState)
   // const { data = { word: '' }, isFetching } = useFetchWordsQuery()
   const [isFetching, setIsFetching] = useState(true)
   const data = [
@@ -31,6 +33,13 @@ const Game = (): JSX.Element => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    if (gameState === GameState.RESTART) {
+      dispatch(setGameState(GameState.PLAY))
+      window.location.reload()
+    }
+  }, [gameState, winner])
+
+  useEffect(() => {
     setTimeout(() => {
       setIsFetching(false)
     }, 600)
@@ -39,6 +48,7 @@ const Game = (): JSX.Element => {
   useEffect(() => {
     if (!isFetching) {
       const randomWord = data[difficulty][Math.floor(Math.random() * data[difficulty].length)]
+      // const randomWord = data.word
       dispatch(setWord(randomWord))
     }
   }, [isFetching])
