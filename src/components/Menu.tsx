@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useAppSelector } from "../app/hooks"
 import { setGameState } from "../features/hangman-slice"
 import { GameState } from "../models/game-state"
@@ -8,7 +9,9 @@ const Menu = (): JSX.Element => {
   return (
     <>
       <h1 className="text-center text-6xl">Hangman</h1>
-      <Button element="Play" actions={[setGameState(GameState.PLAY)]} />
+      <Link to="/game" className="mx-auto">
+        <Button element="Play" actions={[setGameState(GameState.PLAY)]} />
+      </Link>
       <Button element={difficulty} actions={[setGameState(GameState.DIFFICULTY_SELECTION)]} />
       <Button element="Dashboard" actions={[setGameState(GameState.DASHBOARD)]} />
       <Button element="Settings" actions={[setGameState(GameState.SETTINGS)]} />
