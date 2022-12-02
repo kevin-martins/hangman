@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import { store } from './app/store';
 import App from './pages/App';
 import Game from './pages/Game';
@@ -14,13 +14,13 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <BrowserRouter basename='/hangman'>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="game" element={<Game />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </React.StrictMode>
   </Provider>
 );
