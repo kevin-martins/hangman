@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/hangman/static/css/main.bcdceb30.css",
+    "main.js": "/hangman/static/js/main.9c271bba.js",
+    "static/js/845.10b0f05f.chunk.js": "/hangman/static/js/845.10b0f05f.chunk.js",
+    "static/media/game-over.wav": "/hangman/static/media/game-over.97b8c97eae6e2e613033.wav",
+    "static/media/won.wav": "/hangman/static/media/won.636b1967a983d8a5293e.wav",
+    "static/media/button-hover.wav": "/hangman/static/media/button-hover.80f01a1b0371515f5a79.wav",
+    "static/media/button-click.wav": "/hangman/static/media/button-click.b3bbfd78e0fc52210661.wav",
+    "index.html": "/hangman/index.html",
+    "main.bcdceb30.css.map": "/hangman/static/css/main.bcdceb30.css.map",
+    "main.9c271bba.js.map": "/hangman/static/js/main.9c271bba.js.map",
+    "845.10b0f05f.chunk.js.map": "/hangman/static/js/845.10b0f05f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bcdceb30.css",
+    "static/js/main.9c271bba.js"
+  ]
+}
