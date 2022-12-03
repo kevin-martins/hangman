@@ -15,8 +15,6 @@ export const Restart = (): JSX.Element => {
   useEffect(() => {
     if (winner === WinningState.COMPUTER || winner === WinningState.PLAYER)
       dispatch(setPlayerTurn(false))
-    if (winner === WinningState.PLAYER)
-      dispatch(setPoints())
   }, [])
 
   return (
