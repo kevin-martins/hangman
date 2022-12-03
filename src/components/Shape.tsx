@@ -9,8 +9,8 @@ import gameOver from '../assets/game-over.wav'
 
 const Shape = () => {
   const soundVolume = useAppSelector(state => state.hangman.soundVolume) / 100
-  const [playGameOver] = useSound(gameOver , { volume: soundVolume })
   const wrongLetters = useAppSelector(state => state.hangman.wrongLetters).length
+  const [playGameOver] = useSound(gameOver , { volume: soundVolume })
   const dispatch = useAppDispatch()
 
   useEffect(() => {
