@@ -34,12 +34,8 @@ export const completeWord = (word: string, wordProgression: WordProgression[]): 
   })
 }
 
-export const generatePoints = (wordProgression: WordProgression[], difficulty: DifficultyProps, winner: WinningState): number => {
-  if (winner === WinningState.COMPUTER) return 0
-  return wordProgression.reduce((acc: number, cur: WordProgression): number => {
-    acc++
-    return acc
-  }, 0) * (difficulty + 1)
+export const generatePoints = (word: string, difficulty: DifficultyProps): number => {
+  return Math.ceil(word.length * (difficulty + 1))
 }
 
 export const checkPlayerVictory = (wordProgression: WordProgression[]): WinningState => {
