@@ -25,25 +25,25 @@ const Game = (): JSX.Element => {
   // const { data = { word: '' }, isFetching } = useFetchWordsQuery()
   const [isFetching, setIsFetching] = useState(true)
   const data = [
-    ["bonjour", "animal", "licorne", "chanter", "classe"],
-    ["classique", "atomique", "attraction", "combattant", "jongleur"],
-    ["incroyablement", "polykystique", "polycyclique", "chronophage", "hypoglycemie"],
+    ["bonjour", "animal", "licorne", "chanter", "classe", "canard", "arbre", "poisson"],
+    ["classique", "atomique", "attraction", "combattant", "jongleur", "attaquer", "alcoolique"],
+    ["incroyablement", "polykystique", "polycyclique", "chronophage", "hypoglycemie", "enturloupe", "abaissables"],
   ]
   const word = useAppSelector(state => state.hangman.word)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (gameState === GameState.RESTART) {
+      setIsFetching(true)
       dispatch(setGameState(GameState.PLAY))
-      window.location.reload()
     }
   }, [gameState, winner])
 
   useEffect(() => {
     setTimeout(() => {
       setIsFetching(false)
-    }, 600)
-  }, [])
+    }, 800)
+  }, [isFetching === true])
 
   useEffect(() => {
     if (!isFetching) {
@@ -96,7 +96,7 @@ const Game = (): JSX.Element => {
 
   return (
     <div className='bg-gray-700 h-screen'>
-      {isFetching ? <Loading /> : 
+      {isFetching || gameState === GameState.RESTART ? <Loading /> : 
       <>
         <Notification notification={notification} />
         <Points />
