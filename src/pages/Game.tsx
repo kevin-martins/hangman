@@ -71,9 +71,9 @@ const Game = (): JSX.Element => {
             setNotification({ shown: true, message: `Letter '${userInput.toUpperCase()}' is correct but had already been used !` })
           }
         } else {
-          if (!wrongLetters.includes(userInput))
+          if (!wrongLetters.includes(userInput)) {
             dispatch(setWrongLetter(userInput))
-          else {
+          } else {
             clearTimeout(timer)
             setNotification({ shown: true, message: `Letter '${userInput.toUpperCase()}' is incorrect and had already been rejected !` })
           }
@@ -89,20 +89,22 @@ const Game = (): JSX.Element => {
   }, [wordProgression, wrongLetters, playerTurn])
 
   useEffect(() => {
-    setTimer(setTimeout(() => {
-      setNotification({ shown: false, message: '' })
-    }, 2000))
+    if (notification.shown === true) {
+      setTimer(setTimeout(() => {
+        setNotification({ shown: false, message: '' })
+      }, 1500))
+    }
   }, [notification.shown])
 
   return (
     <div className='bg-gray-700 h-screen'>
       {isFetching || gameState === GameState.RESTART ? <Loading /> : 
       <>
-        <Notification notification={notification} />
         <Points />
         <WrongLetters />
         <Shape />
         <DisplayWord />
+        {notification.shown && <Notification message={notification.message} />}
         {winner !== WinningState.NONE && <Restart />}
       </>
       }
