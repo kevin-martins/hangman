@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from "../app/hooks"
-import { setGameState, setPlayerTurn, setPoints, setReset, setWinnerState } from "../features/hangman-slice"
+import { setGameState, setPlayerTurn, setReset } from "../features/hangman-slice"
 import { capitalize } from "../helpers/helpers"
 import { GameState } from "../models/game-state"
 import { WinningState } from "../models/winner-state"

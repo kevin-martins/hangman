@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { setWinnerState } from '../features/hangman-slice'
 import { useSound } from 'use-sound'
-import { checkComputerVictory, completeWord } from '../helpers/helpers'
+import { checkComputerVictory } from '../helpers/helpers'
 import { WinningState } from '../models/winner-state'
 import '../styles/shape.css'
 import gameOver from '../assets/game-over.wav'

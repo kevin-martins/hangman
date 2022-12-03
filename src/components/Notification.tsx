@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import '../styles/notification.css'
 
 type Props = {
