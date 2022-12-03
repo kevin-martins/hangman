@@ -16,10 +16,12 @@ const Points = (): JSX.Element => {
     }, [winner])
 
     useEffect(() => {
-        setAnimation(true)
-        setTimeout(() => {
-            setAnimation(false)
-        }, 1200)
+        if (points > 0) {
+            setAnimation(true)
+            setTimeout(() => {
+                setAnimation(false)
+            }, 1200)
+        }
     }, [points])
 
     return (

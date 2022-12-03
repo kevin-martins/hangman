@@ -40,10 +40,12 @@ const Game = (): JSX.Element => {
   }, [gameState, winner])
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsFetching(false)
-    }, 800)
-  }, [isFetching === true])
+    if (isFetching) {
+      setTimeout(() => {
+        setIsFetching(false)
+      }, 800)
+    }
+  }, [isFetching])
 
   useEffect(() => {
     if (!isFetching) {
