@@ -13,6 +13,7 @@ type Props = {
 
 const Button = ({ element, actions, isSelected = false }: Props): JSX.Element => {
 	const soundVolume = useAppSelector(state => state.hangman.soundVolume) / 100
+	// const context = new AudioContext()
 	const [playHover] = useSound(soundHover, { volume: soundVolume })
 	const [playClick] = useSound(soundClick, { volume: soundVolume })
 	const dispatch = useAppDispatch();
@@ -26,19 +27,25 @@ const Button = ({ element, actions, isSelected = false }: Props): JSX.Element =>
 	}
 
 	const handleClick = () => {
+		// context.resume().then(() => console.log('click'))
 		playClick()
 		actions.forEach(action => {
 			dispatch(action)
 		})
 	}
 
+	const handleHover = () => {
+		// context.resume().then(() => console.log('hover'))
+		playHover()
+	}
+
     return (
         <button
 			className="mx-auto bg-gray-600"
 			onClick={handleClick}
-			onMouseEnter={() => playHover()}
+			onMouseEnter={handleHover}
 		>
-			<span className="">
+			<span>
 				<span
 					data-attr-color='white'
 					className={`${setColor(element)} ${isSelected && 'selected'} font-semibold z-10`}

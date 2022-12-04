@@ -25,7 +25,7 @@ const Points = (): JSX.Element => {
     }, [points])
 
     return (
-        <div className='flex flex-row w-full py-8 px-12'>
+        <div className='flex flex-row w-full pt-2 pb-1 sm:px-12 px-0 mr-3'>
             <p className={`${animation && 'growth'} h-full my-auto ml-auto text-yellow-500 text-xl pr-1`}>{points}</p>
             <img
                 src="https://img.icons8.com/emoji/48/null/coin-emoji.png"

@@ -21,7 +21,7 @@ const Shape = () => {
   }, [wrongLetters])
 
   return (
-    <svg height="250" width="200" className="absolute lg:top-32 sm:top-20 top-14 sm:left-20 lg:left-1/4">
+    <svg height="250" width="180">
       {/* <!-- Rod --> */}
       <line x1="60" y1="20" x2="140" y2="20" />
       <line x1="140" y1="20" x2="140" y2="50" />

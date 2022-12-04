@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { setGameState, setPlayerTurn, setWord, setWordProgression, setWrongLetter } from '../features/hangman-slice'
+import { setGameState, setKeyboard, setPlayerTurn, setWord, setWordProgression, setWrongLetter } from '../features/hangman-slice'
 import { useFetchWordsQuery } from '../features/words/word-api-slice'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { correctLetters, progression } from '../helpers/helpers'
@@ -12,6 +12,8 @@ import Notification from '../components/Notification'
 import Restart from '../components/Restart'
 import { WinningState } from '../models/winner-state'
 import { GameState } from '../models/game-state'
+import Keyboard from '../components/Keyboard'
+import Button from '../components/Button'
 
 const Game = (): JSX.Element => {
   const [timer, setTimer] = useState<any>()
@@ -22,6 +24,7 @@ const Game = (): JSX.Element => {
   const winner = useAppSelector(state => state.hangman.winner)
   const difficulty = useAppSelector(state => state.hangman.difficulty)
   const gameState = useAppSelector(state => state.hangman.gameState)
+  const keyboard = useAppSelector(state => state.hangman.keyboard)
   // const { data = { word: '' }, isFetching } = useFetchWordsQuery()
   const [isFetching, setIsFetching] = useState(true)
   const data = [
@@ -87,6 +90,7 @@ const Game = (): JSX.Element => {
       window.addEventListener('keydown', handleKeyDown)
       dispatch(setPlayerTurn(true))
     }
+    console.log(word)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [wordProgression, wrongLetters, playerTurn])
 
@@ -97,18 +101,29 @@ const Game = (): JSX.Element => {
       }, 1500))
     }
   }, [notification.shown])
-
+  // console.log(word)
   return (
     <div className='bg-gray-700 h-screen'>
       {isFetching || gameState === GameState.RESTART ? <Loading /> : 
-      <>
-        <Points />
-        <WrongLetters />
-        <Shape />
-        <DisplayWord />
-        {notification.shown && <Notification message={notification.message} />}
-        {winner !== WinningState.NONE && <Restart />}
-      </>
+      <div className='grid h-full '>
+        <div className='w-full mx-auto max-w-xl'>
+          <Points />
+          <div className='flex flex-row'>
+            <Shape />
+            <WrongLetters />
+          </div>
+          <DisplayWord />
+          <div className='w-10 mx-auto'>
+            <button className="w-10 text-white" onClick={() => dispatch(setKeyboard())}>
+              {!keyboard && <i className="fi fi-rr-angle-up" />}
+              {keyboard && <i className="fi fi-rr-angle-down" />}
+            </button>
+          </div>
+          {keyboard && <Keyboard />}
+          {notification.shown && <Notification message={notification.message} />}
+          {winner !== WinningState.NONE && <Restart />}
+        </div>
+      </div>
       }
     </div>
   )

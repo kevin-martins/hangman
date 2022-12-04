@@ -22,7 +22,7 @@ const DisplayWord = (): JSX.Element => {
 
     return (
         <div
-            className="flex flex-wrap gap-2 w-max absolute bottom-0 right-1/2 translate-x-1/2 mb-16 text-3xl"
+            className="flex flex-wrap gap-2 w-max mx-auto mb-2 text-3xl"
         >
             {wordProgression.map((word: WordProgression, i: number): JSX.Element => (
                 <span key={word.letter + i} className={word.color}>

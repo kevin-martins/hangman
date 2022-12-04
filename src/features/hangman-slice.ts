@@ -9,6 +9,7 @@ import { WordProgression } from '../models/word-progression'
 interface HangmanState {
     gameState: GameState
     difficulty: DifficultyProps
+    keyboard: boolean
     word: string
     wordProgression: WordProgression[],
     wrongLetters: string[]
@@ -22,6 +23,7 @@ interface HangmanState {
 const initialState: HangmanState = {
     gameState: GameState.MENU,
     difficulty: DifficultyProps.EASY,
+    keyboard: false,
     word: '',
     wordProgression: [],
     wrongLetters: [],
@@ -41,6 +43,9 @@ const hangmanSlice = createSlice({
         },
         setGameState(state, action: PayloadAction<GameState>) {
             state.gameState = action.payload
+        },
+        setKeyboard(state) {
+            state.keyboard = !state.keyboard
         },
         setWord(state, action: PayloadAction<string>) {
             state.word = action.payload.toLowerCase()
@@ -91,6 +96,7 @@ const hangmanSlice = createSlice({
 export const {
     setDifficulty,
     setGameState,
+    setKeyboard,
     setPlayerTurn,
     setWord,
     setPoints,
