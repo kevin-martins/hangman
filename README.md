@@ -6,9 +6,9 @@ link for the project: https://kevin-martins.github.io/hangman/
 
 Start by a loading screen to search the word.
 When the word has been choosen, the hangman will display with the missing word as dashes.
-You can dispay a keyboard if you're a mobile or labtop user because there is no keyboard for them by clicking on the Arrow.
+You can dispay a keyboard (by clicking on the arrow) if you're a mobile or labtop user because there is no keyboard for them.
 
-By pressing a letter that is not in the missing word, the hangman will increase and the letter will be displayed with the red color. Is the letter is in the current missing word, the letter will be green and it will appear in the missing word instead of the dash.
+By pressing a letter (on the game keyboard or the computer keyboard) if the letter is not in the missing word, the hangman will increase and the letter will be displayed with the color red. If the letter is in the current missing word, the letter will be displayed in green and it will appear in the missing word instead of its current dashes.
 
 If you succed to guess the word, you'll win and earning some coins.
 If not nothing happens you just losed.
